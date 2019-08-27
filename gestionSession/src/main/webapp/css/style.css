@@ -1,0 +1,114 @@
+.formulaire {
+	
+border : 2px solid;
+width: 40%;
+height: 40%;
+margin : 60px auto;
+
+
+}
+
+h3{
+	font-size :50px;
+}
+.erreur{
+	color:red;
+	border : 2px solid red;
+	margin-top:7%;
+	text-align: center;
+		width:50%;
+		margin-left:25%;
+}
+#logout{
+	display:block;
+	border : 2px solid;
+		width :5.7%;
+	
+}
+.menu_p{
+	border : 2px solid white;
+	display: inline-table;
+	border-radius: 5px;
+	padding: 0 50px 6px;
+	margin-right: 50px;
+}
+
+a{
+  color:red;
+}
+
+#menu{
+	display : block;
+	border : 2px solid black;
+	border-radius: 5px;
+	background: #000000;
+	margin-top :7%;
+	width :100%;
+	box-shadow : 10px 10px 10px black;
+}
+
+#menuDeroulant{
+	display:none;
+}
+#menuDeroulant li{
+	border : 2px solid black;
+	border-radius: 5px;
+	background: #000000;
+	margin-top :7%;
+	width :100%;
+	box-shadow : 10px 10px 10px black;
+	display : block;
+}
+#menuDeroulant li a{
+	display : block;
+	width: 150px;
+	color :blue;
+}
+#menu li:hover #menuDeroulant{
+	display: block;
+	position: absolute; 
+	margin-right :30%;
+	
+
+}
+
+#header{
+	
+	border : 2px solid;
+	background-image: url("img/header.jpg");
+    height:13em;
+	color: white;
+	text-align: center;
+	padding-top : 30px
+	width :100%;
+	box-shadow : 10px 10px 10px black;
+}
+
+table{
+	border-collapse: collapse;
+	margin-top:8%;
+		width:100%
+
+}
+
+tr , th{
+	border: 1px solid black;
+}
+
+#entete{
+	border: 2px double black;
+}
+
+ section {
+	 display : none; 
+	 border: 2px double black;
+	 background : black;
+	 color : white;
+
+} 
+
+
+ section p {
+	border: 1px solid white;
+	border-radius : 5px;
+} 

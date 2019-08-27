@@ -1,0 +1,6 @@
+projet\servlet\LoginServlet.class
+projet\servlet\EnregistreServlet.class
+projet\servlet\LogoutServlet.class
+projet\servlet\UpdateServlet.class
+projet\servlet\ValiderDelServlet.class
+projet\filter\NonLoginFilter.class
