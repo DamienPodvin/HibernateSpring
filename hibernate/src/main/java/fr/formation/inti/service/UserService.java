@@ -2,13 +2,19 @@ package fr.formation.inti.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import fr.formation.inti.dao.EmployeeDaoImpl;
 import fr.formation.inti.dao.UserDaoImpl;
 import fr.formation.inti.entities.Employee;
 import fr.formation.inti.entities.User;
-
+@Service
 public class UserService {
+	
+	@Autowired
 	private static UserDaoImpl dao;
+	@Autowired
 	private static EmployeeDaoImpl dao2;
 	
 	public UserService() {

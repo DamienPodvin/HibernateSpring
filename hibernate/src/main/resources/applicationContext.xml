@@ -1,0 +1,24 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:context= "http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    
+    <context:annotation-config/>
+    
+    <context:component-scan base-package="fr.formation.inti.dao"/>
+    <context:component-scan base-package="fr.formation.inti.service"/>
+        
+<!--     <bean id="hello" class="fr.formation.inti.beans.HelloBean" scope="prototype">
+    <constructor-arg name="x" value="100"></constructor-arg>
+    <property name="m" ref="message"></property>
+    </bean>
+    
+    <bean id="message" class="fr.formation.inti.beans.MessageBean" factory-method="createInstance" >
+    <constructor-arg  value="wesh ma gueule"></constructor-arg>
+    </bean> -->
+	 
+</beans>

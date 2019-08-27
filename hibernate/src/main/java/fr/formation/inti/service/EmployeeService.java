@@ -2,16 +2,21 @@ package fr.formation.inti.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import fr.formation.inti.dao.EmployeeDaoImpl;
 import fr.formation.inti.entities.Employee;
 
+@Service("service")
 public class EmployeeService {
 	
+	@Autowired
 	private static EmployeeDaoImpl dao;
 	
-	public EmployeeService() {
-		dao = new EmployeeDaoImpl();
-	}
+//	public EmployeeService() {
+//		dao = new EmployeeDaoImpl();
+//	}
 	public void persist(Employee e) {
         dao.openCurrentSessionwithTransaction();
         dao.persist(e);

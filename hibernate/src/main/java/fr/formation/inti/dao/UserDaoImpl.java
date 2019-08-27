@@ -9,11 +9,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
 import fr.formation.inti.entities.Employee;
 import fr.formation.inti.entities.User;
 import fr.formation.inti.utils.HibernateUtils;
 
+@Repository
 public class UserDaoImpl implements IUserDao {
 	
 	private Session currentSession;
