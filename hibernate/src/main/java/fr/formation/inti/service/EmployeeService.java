@@ -4,19 +4,26 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.inti.dao.EmployeeDaoImpl;
 import fr.formation.inti.entities.Employee;
 
 @Service("service")
+@Transactional
 public class EmployeeService {
 	
 	@Autowired
-	private static EmployeeDaoImpl dao;
+	private EmployeeDaoImpl dao;
 	
-//	public EmployeeService() {
-//		dao = new EmployeeDaoImpl();
-//	}
+	
+	
+	public void setDao(EmployeeDaoImpl dao) {
+		this.dao = dao;
+	}
+	public EmployeeService() {
+		System.out.println("EmployeeService");
+	}
 	public void persist(Employee e) {
         dao.openCurrentSessionwithTransaction();
         dao.persist(e);

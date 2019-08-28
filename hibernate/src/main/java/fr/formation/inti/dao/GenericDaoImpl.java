@@ -9,8 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import fr.formation.inti.entities.Employee;
 import fr.formation.inti.utils.HibernateUtils;
 
 /**
@@ -24,57 +25,29 @@ import fr.formation.inti.utils.HibernateUtils;
  * @param <I>
  *
  */
+
+@Repository
 public class GenericDaoImpl<T, I extends Serializable> implements IGenericDao <T,I> {
-	private Session currentSession;
-	private Transaction currentTransaction;
+
 	private Class clazz;
+	@Autowired
+	private SessionFactory sessionFactory;
 	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+
+
 	public void setClazz(Class clazz) {
 		this.clazz = clazz;
 	}
-
-	public Session openCurrentSession() {
-        currentSession = getSessionFactory().openSession();
-        return currentSession;
-    }
- 
-    public Session openCurrentSessionwithTransaction() {
-        currentSession = getSessionFactory().openSession();
-        currentTransaction = currentSession.beginTransaction();
-        return currentSession;
-    }
-     
-    public void closeCurrentSession() {
-        currentSession.close();
-    }
-     
-    public void closeCurrentSessionwithTransaction() {
-        currentTransaction.commit();
-        currentSession.close();
-    }
-    private static SessionFactory getSessionFactory() {
-        Configuration configuration = new Configuration().configure();
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties());
-        SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-        return sessionFactory;
-    }
- 
-    public Session getCurrentSession() {
-        return currentSession;
-    }
- 
-    public void setCurrentSession(Session currentSession) {
-        this.currentSession = currentSession;
-    }
- 
-    public Transaction getCurrentTransaction() {
-        return currentTransaction;
-    }
- 
-    public void setCurrentTransaction(Transaction currentTransaction) {
-        this.currentTransaction = currentTransaction;
-    }
 
 	@Override
 	public List<T> getAll() {
