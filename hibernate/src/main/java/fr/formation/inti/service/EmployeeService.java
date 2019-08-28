@@ -25,41 +25,36 @@ public class EmployeeService {
 		System.out.println("EmployeeService");
 	}
 	public void persist(Employee e) {
-        dao.openCurrentSessionwithTransaction();
+       
         dao.persist(e);
-        dao.closeCurrentSessionwithTransaction();
+      
     }
 	public Integer save(Employee e) {
-		Integer id;
-        dao.openCurrentSessionwithTransaction();
-        id = dao.save(e);
-        dao.closeCurrentSessionwithTransaction();
-        return id;
+		
+        return dao.save(e);
+        
     }
     public void update(Employee e) {
-        dao.openCurrentSessionwithTransaction();
+     
         dao.update(e);
-        dao.closeCurrentSessionwithTransaction();
+       
     }
  
     public Employee findById(Integer id) {
-        dao.openCurrentSession();
-        Employee emp = dao.findById(id);
-        dao.closeCurrentSession();
-        return emp;
+        
+        return dao.findById(id, Employee.class);
+        
+        
     }
  
     public void delete(Integer id) {
-        dao.openCurrentSessionwithTransaction();
-        Employee emp = dao.findById(id);
+        
+        Employee emp = dao.findById(id,Employee.class);
         dao.delete(emp);
-        dao.closeCurrentSessionwithTransaction();
     }
     public List<Employee> findAll() {
-        dao.openCurrentSession();
-        List<Employee> employees = dao.getAll();
-        dao.closeCurrentSession();
-        return employees;
+        
+        return dao.getAll();
     }
  
     

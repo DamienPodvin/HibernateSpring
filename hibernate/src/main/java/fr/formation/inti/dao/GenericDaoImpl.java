@@ -1,14 +1,12 @@
 package fr.formation.inti.dao;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,35 +23,34 @@ import fr.formation.inti.utils.HibernateUtils;
  * @param <I>
  *
  */
-
+@SuppressWarnings("unchecked")
 @Repository
-public class GenericDaoImpl<T, I extends Serializable> implements IGenericDao <T,I> {
+public abstract class GenericDaoImpl<T, I extends Number> implements IGenericDao <T,I> {
 
-	private Class clazz;
+	protected Class<? extends T> daoType;
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	public GenericDaoImpl() {
+        Type t = getClass().getGenericSuperclass();
+        ParameterizedType pt = (ParameterizedType) t;
+        daoType = (Class) pt.getActualTypeArguments()[0];
+    }
 
-
-
-	public void setClazz(Class clazz) {
-		this.clazz = clazz;
-	}
 
 	@Override
 	public List<T> getAll() {
-		Query q = getCurrentSession().createQuery("FROM " + clazz.getSimpleName());		
-		List<T> employees = q.list();
-		return employees;
+		return getCurrentSession().createCriteria(daoType).list();
+	}
+
+	private Session getCurrentSession() {
+		// TODO Auto-generated method stub
+		return sessionFactory.getCurrentSession();
 	}
 
 	@Override
@@ -78,24 +75,20 @@ public class GenericDaoImpl<T, I extends Serializable> implements IGenericDao <T
 	}
 
 	@Override
-	public T findById(I id) {
-		T emp = (T) getCurrentSession().get(clazz, id);
+	public T findById(I id, Class<?> persistClass) {
+		T emp = (T) getCurrentSession().get(persistClass, id);
 		return emp;
 	}
 
 	@Override
-	public void deleteByID(I id) {
+	public void deleteByID(I id, Class<?> persistClass) {
 		try {
-			T e = findById(id);
+			T e = findById(id, persistClass);
 			delete(e);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-	}
-
-	public void close() {
-		HibernateUtils.shutdown();
 	}
 
 
